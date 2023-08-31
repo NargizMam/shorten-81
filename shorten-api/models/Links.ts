@@ -10,6 +10,11 @@ const LinkSchema = new Schema({
     shortUrl: {
         type: String,
         required: false
+    },
+    id: {
+        type: String,
+        unique: true,
+        required: false
     }
 });
 

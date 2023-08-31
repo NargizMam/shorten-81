@@ -1,6 +1,7 @@
 import express from "express";
 import Link from '../models/Links';
-import {LinkWithoutId} from "../types";
+import * as shortid from 'shortid';
+import {ApiLink} from "../types";
 
 const linksRouter = express.Router();
 linksRouter.get('/:shortUrl', async (req, res) => {
@@ -15,23 +16,21 @@ linksRouter.get('/:shortUrl', async (req, res) => {
     }
 });
 linksRouter.post('/', async (req, res) => {
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let resultUrl: string = '';
-    for(let i = 0; i < resultUrl.length; i++){
-        resultUrl += chars[Math.round(Math.random()*(chars.length-7-1))];
+    try{
+    const baseUrl = 'httsp://localhost/';
+    const gid: string = shortid.generate()
+    const originalLink = req.body.originalUrl;
+    const generatedLink: string = baseUrl ? `https://${baseUrl}/${gid}` : `https://${req.headers.host}/${gid}`
+    const linkData: ApiLink = {
+        originalUrl: originalLink,
+        shortUrl: generatedLink,
+        _id: gid,
     }
-    try {
-        const linkData: LinkWithoutId = {
-            originalUrl: req.body.originalUrl,
-            shortUrl: resultUrl
-        };
-
         const link = new Link(linkData);
-
         await link.save();
-        return res.send(link);
-    } catch (error) {
-        return res.status(400).send(error);
+        return res.send(linkData);
+    } catch (e) {
+        return res.status(400).send('Error');
     }
 
 });
