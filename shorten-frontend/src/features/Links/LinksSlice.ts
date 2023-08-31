@@ -1,5 +1,5 @@
 import { Link } from '../../types';
-import { createLink, getLinkByShortUrl } from './LinkThunk';
+import { createLink } from './LinkThunk';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 

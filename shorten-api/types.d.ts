@@ -4,6 +4,3 @@ export interface Link {
     originalUrl: string
 }
 export type LinkWithoutId = Omit<Link, '_id'>;
-export interface ApiLink {
-    originalUrl: string
-}
