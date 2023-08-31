@@ -9,10 +9,3 @@ export const createLink = createAsyncThunk<void, string>(
     await axiosApi.post('/links', {originalUrl: linkMutation});
   }
 );
-export const getLinkByShortUrl = createAsyncThunk<Link, void>(
-  'links/:shortUrl',
-  async () => {
-    const link = await axiosApi.get<Link>('/links/:shortUrl')
-    return link.data;
-  }
-);

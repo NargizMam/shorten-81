@@ -30,16 +30,6 @@ export const linksSlice = createSlice({
     builder.addCase(createLink.rejected, state => {
       state.creating = false;
     });
-    builder.addCase(getLinkByShortUrl.pending, (state) => {
-      state.fetching = true;
-    });
-    builder.addCase(getLinkByShortUrl.fulfilled, (state, {payload: link}) => {
-      state.fetching = false;
-      state.link = link;
-    });
-    builder.addCase(getLinkByShortUrl.rejected, state => {
-      state.fetching = false;
-    });
   }
 });
 
