@@ -1,7 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
+import { linksReducer } from '../features/Links/LinksSlice';
 
 export const store = configureStore({
   reducer: {
+    links: linksReducer
   }
 
 });
